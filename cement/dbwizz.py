@@ -5,16 +5,7 @@ import psycopg2
 from cement.core.controller import CementBaseController, expose
 from cement.core import output
 
-from tabulate import tabulate
-
 from enkidu import dbutils
-
-class TableOutput(output.CementOutputHandler):
-  class Meta:
-    label = 'tabulate'
-
-  def render(self,data, template, **kwargs):
-    print(tabulate(data, **kwargs))
 
 class DBController(CementBaseController):
   class Meta:
