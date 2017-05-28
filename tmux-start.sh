@@ -1,8 +1,13 @@
 #!/bin/bash
 
-SESSION=${PWD##*/}
+SESSION=$(echo ${PWD##*/} | sed -e 's/^./\u&/')
 
 tmux new-session -d -s $SESSION
+
+tmux set-environment TASKWARRIOR_PROJECT $SESSION
+tmux send-keys -t 1.1 "TASKWARRIOR_PROJECT=$SESSION" C-m
+tmux send-keys -t 1.1 ". ~/.aliases; clear" C-m
+
 tmux split-window -h
 
 tmux new-window -n 'dbutils'
